@@ -86,6 +86,29 @@ cursor:pointer;
                                   
                             </thead>
                             <tbody>
+
+                                {% for a in sunits %}
+
+                                <tr class="table-row " data-href="{% url 'unit_alter' a.id %}" >
+
+                                    <td colspan="2" >{{ a.symbol }}</td>
+                                  
+                                    {% for a in cunits %}
+
+                                    <tr class="table-row " data-href="{% url 'c_unit_alter' a.id %}" >
+    
+                                        <td colspan="2" >{{ a.first_unit }}&nbsp{{ a.conversion }}&nbsp{{ a.second_unit }}</td>
+                                      
+                              
+                                       
+                                    </tr>
+                                
+                                {% endfor %} 
+                                
+                                   
+                                </tr>
+                            
+                            {% endfor %} 
                             
                             
                             </tbody>
@@ -103,5 +126,49 @@ cursor:pointer;
         
     </div>
   
+
+    
+    <script>
+        $(document).ready(function($) {
+            $(".table-row").dblclick(function() {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
+    
+    <script>
+            
+        var index;  // variable to set the selected row index
+        function getSelectedRow()
+        {
+            var table = document.getElementById("table");
+            for(var i = 1; i < table.rows.length; i++)
+            {
+                table.rows[i].onclick = function()
+                {
+                    // clear the selected from the previous selected row
+                    // the first time index is undefined
+                    if(typeof index !== "undefined"){
+                        table.rows[index].classList.toggle("selected");
+                    }
+                   
+                    index = this.rowIndex;
+                    this.classList.toggle("selected");
+
+                };
+            }
+                
+        }
+
+
+        getSelectedRow();
+
+        
+
+        
+        
+        
+        
+    </script>
    
 {% endblock %}

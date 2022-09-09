@@ -8,14 +8,9 @@
 
 <head>
     <style>
-       
-        /* td {
-    border: .5px solid rgba(255, 255, 255, .3); ;
-    
-    
- } */
+
  .table1 th {
-    border: .5px solid rgba(255, 255, 255, .3); ;
+    border:none; ;
     
     
  }
@@ -42,10 +37,9 @@ cursor:pointer;
 
     
   }
-  .table1{
-    border: 1px solid rgb(103, 175, 220);
-  }
-  .selected{background-color:  rgb(216, 155, 51);color: #fff;font-weight: bold
+  
+  .selected{
+    background-color:  rgb(216, 155, 51);color: #fff;font-weight: bold
 }
   .selected1 {
     background-color:  rgb(77, 154, 242);
@@ -81,27 +75,28 @@ cursor:pointer;
                                   
                             </thead>
                             <tbody>
-                            
 
+                               
                                 
-                                <tr class="table-row " data-href="{% url 'units' %}" >
+                              <tr class="table-row " data-href="{% url 'units' %}" >
                                     <td colspan="2" >Units</td>
                                   
-                                    <td style="text-align: center;" >0</td>
+                                    <td style="text-align: center;" >{{ uni3 }}</td>
                                    
                                 </tr>
                                 
                                 <tr class="table-row " data-href="{% url 'currencies' %}" >
                                     <td colspan="2" >Currencies</td>
                                   
-                                    <td style="text-align: center;" >0</td>
+                                    <td style="text-align: center;" >{{ cur3 }}</td>
+                                    </td>
                                    
                                 </tr>
                                 
                                 <tr class="table-row " data-href="{% url 'atten_prod' %}" >
                                     <td colspan="2" >Attendance / Production Types</td>
                                   
-                                    <td style="text-align: center;" >0</td>
+                                    <td style="text-align: center;" >{{ att1 }}</td>
                                    
                                 </tr>
 
@@ -109,14 +104,14 @@ cursor:pointer;
                                 <tr class="table-row " data-href="{% url 'emp_groups' %}" >
                                     <td colspan="2" >Employee Groups</td>
                                   
-                                    <td style="text-align: center;" >0</td>
+                                    <td style="text-align: center;" >{{ empg }}</td>
                                    
                                 </tr>
                                 
                                 <tr class="table-row " data-href="{% url 'employee' %}" >
                                     <td colspan="2" >Employees</td>
                                   
-                                    <td style="text-align: center;" >0</td>
+                                    <td style="text-align: center;" >{{ emp }}</td>
                                    
                                 </tr>
 
@@ -149,6 +144,17 @@ cursor:pointer;
         </div>
         
     </div>
+    <footer>
+
+    <table border="default_if_none" class="table1 col" style="text-align: center; margin-top: 10px;border:0;" >
+        <thead>
+            <th ><a href="{% url 'base' %}" type="button"  class="btn p-1 px-4" >Quit</a></th>
+            <th><button type="button"  class="btn p-1 px-4" onclick="selectFunction()">Select</button></th>
+            <th><button type="button"  class="btn p-1 px-1" onclick="removeSelectedRow()">Remove Line</button></th>
+            <th><button type="button" id="undo" type="button"  class="btn p-1 px-1" >Restore Line</button>></th>
+        </thead>
+    </table>
+</footer>
     <script>
         $(document).ready(function($) {
             $(".table-row").dblclick(function() {
@@ -194,11 +200,11 @@ cursor:pointer;
     <script>
 
        
-function myFunction() {
-     var se = document.getElementsByClassName('selected');
-     se[0].style.backgroundColor = "lightblue";
-        
-}
+        function selectFunction() {
+            var se = document.getElementsByClassName('selected');
+            se[0].style.backgroundColor = "lightblue";
+               
+       }
         </script>
 
 
@@ -208,7 +214,14 @@ function myFunction() {
                 table.deleteRow(index);
                 
             }
+
+
+
+          
 </script>
+
+
+
    
    
 {% endblock %}

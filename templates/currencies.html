@@ -90,15 +90,28 @@ cursor:pointer;
                                   
                             </thead>
                             <tbody>
+                                {% for a in currencyd %}
 
-                                <tr class="table-row " data-href="" >
-                                    <td colspan="2" >&#8377;</td>
+                                <tr class="table-row " data-href="{% url 'curr_alter' a.id %}" >
+
+                                    <td colspan="2" >{{ a.Symbol }}</td>
                                   
                           
                                    
                                 </tr>
                             
-                            
+                            {% endfor %} 
+                            {% for i in currency %}
+
+                            <tr class="table-row " data-href="{% url 'curr_alter2' i.id %}" >
+
+                                <td colspan="2" >{{ i.Symbol }}</td>
+                              
+                      
+                                
+                            </tr>
+                        
+                        {% endfor %} 
                             </tbody>
                             </table>
                         </th>
@@ -114,6 +127,51 @@ cursor:pointer;
         </div>
         
     </div>
+
+
+    <script>
+        $(document).ready(function($) {
+            $(".table-row").dblclick(function() {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
+    
+    <script>
+            
+        var index;  // variable to set the selected row index
+        function getSelectedRow()
+        {
+            var table = document.getElementById("table");
+            for(var i = 1; i < table.rows.length; i++)
+            {
+                table.rows[i].onclick = function()
+                {
+                    // clear the selected from the previous selected row
+                    // the first time index is undefined
+                    if(typeof index !== "undefined"){
+                        table.rows[index].classList.toggle("selected");
+                    }
+                   
+                    index = this.rowIndex;
+                    this.classList.toggle("selected");
+
+                };
+            }
+                
+        }
+
+
+        getSelectedRow();
+
+        
+
+        
+        
+        
+        
+    </script>
   
    
 {% endblock %}
+

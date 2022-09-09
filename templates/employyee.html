@@ -91,12 +91,42 @@ cursor:pointer;
                             </thead>
                             <tbody>
 
-                                <tr class="table-row " data-href="" >
-                                    <td colspan="2" >Primary Cost Category</td>
+                               
+                                {% for a in p_cost %}
+
+                                <tr class="table-row " data-href="{% url 'p_cost' a.id  %}" >
+
+                                    <td colspan="2" >{{ a.name }}</td>
+                                    {% for a in empg %}
+
+                                    <tr class="table-row " data-href="{% url 'empg_alter' a.id %}" >
+    
+                                         <td colspan="2" ><i>{{ a.name }}<i></td>
+                                      
+                              
+                                       
+                                    </tr>
+                                
+                                {% endfor %}
+                                {% for a in emp %}
+
+                                <tr class="table-row " data-href="{% url 'emp_alter' a.id %}" >
+
+                                     <td colspan="2" ><i>{{ a.name }}<i></td>
                                   
-                                    
+                          
                                    
                                 </tr>
+                            
+                            {% endfor %}
+                                  
+                          
+                                   
+                                </tr>
+                            
+                            {% endfor %}
+                            
+                            
                             
                             
                             </tbody>
@@ -114,6 +144,46 @@ cursor:pointer;
         </div>
         
     </div>
+
+    
+        
+    <script>
+        $(document).ready(function($) {
+            $(".table-row").dblclick(function() {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
+    
+    <script>
+            
+        var index;  // variable to set the selected row index
+        function getSelectedRow()
+        {
+            var table = document.getElementById("table");
+            for(var i = 1; i < table.rows.length; i++)
+            {
+                table.rows[i].onclick = function()
+                {
+                    // clear the selected from the previous selected row
+                    // the first time index is undefined
+                    if(typeof index !== "undefined"){
+                        table.rows[index].classList.toggle("selected");
+                    }
+                   
+                    index = this.rowIndex;
+                    this.classList.toggle("selected");
+
+                };
+            }
+                
+        }
+
+
+        getSelectedRow();
+
+ </script>
+  
   
    
 {% endblock %}
