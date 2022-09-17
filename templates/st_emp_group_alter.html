@@ -9,15 +9,14 @@
         }
 
         .form-popup {
-        visibility: hidden;       
-        position: fixed;
-        top: 230px;
-        right: 27px;
-        background-color: rgb(216, 232, 238); 
-        border: 1px solid #f1f1f1;
-        z-index: 9;
-        width: 300px;
-        height: 200px;
+            visibility: hidden;       
+            position: fixed;
+            top: 230px;
+            right: 27px;
+            background-color: rgb(0,0,0,.2); 
+            border: 1px solid #f1f1f1;
+            z-index: 9;
+            width: 300px;
       
       }
     
@@ -29,13 +28,13 @@
 
         <h6  class="bg-info text-light p-2 m-0 text-left">Employee Group Creation (Secondary)</h6>
         {% for a in empalter %}
-            <form  name="myForm" id="" action="{% url 'employee_grp_alter' a.id %}" onsubmit="validateForm()" method="post" class="p-5" style="background-color:rgba(0,0,0,.4);">
+            <form  name="myForm" id="" action="{% url 'statistics_empgrp_alt' a.id %}" onsubmit="validateForm()" method="post" class="p-5" style="background-color:rgba(0,0,0,.4);">
                 {% csrf_token %}
               
 
             <div style="margin-left:250px;" class="row container-fluid  p-2  ">
                 <div class="col-sm-2 m-0 p-0"> <label for="a">Name</label></div>
-                <div class="col-sm-3 m-0 p-0"><input type="text" class="form-control" id="a" placeholder="{{ a.name }}" name="name" autocomplete="off"
+                <div class="col-sm-3 m-0 p-0"><input type="text" class="form-control" value="{{ a.name }}" name="name" autocomplete="off"
                     onblur="passvalues()" ></div>
                 <div class="col-sm-7 m-0 p-0"></div>
             </div>
@@ -52,7 +51,7 @@
             <div class="row container-fluid  p-2 "style="margin-left:250px;">
                 <div class="col-sm-2 m-0 p-0"> <label for="Under">Under</label></div>
                 <div class="col-sm-3 m-0 p-0"> 
-                <input type="text" class="form-control" id="primary-text" onfocus="showList()" autocomplete="off" placeholder="" value="{{ a.under_name }}"  name="under_name"></div>
+                <input type="text" class="form-control" id="primary-text" onfocus="showList()" autocomplete="off" placeholder="" value="{{ a.under }}"  name="under_name"></div>
                 <div class="col-sm-7 m-0 p-0"></div>
             </div>
 
@@ -61,9 +60,9 @@
                 <div class="col-sm-3 m-0 p-0">
                     <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);" 
                      name="salary" id="salary" class="form-control">
-                        <option value="{{ a.salary_details }}">{{ a.salary_details }}<option>
+                        <option value="{{ a.define_salary }}">{{ a.define_salary }}<option>
                         <option value="#">No</option> 
-                        <option value="/empg_details/{{ a.id }}">Yes</option>
+                        <option value="/statistics_empg_dtls/{{ a.id }}">Yes</option>
                     </select> <br><br>
                     <div class="col-sm-7 m-0 p-0"></div>
                 </div>
@@ -90,9 +89,9 @@
         <table >
         <tr >
             <td>
-              <a href="emloyee_group_secondary"><button
+              <a href="{% url 'statistics_empg_create' %}"><button
                     type="submit"
-                    style="color: black;margin-left: 310%; width: 10%"
+                    style="color: white; width: 100%"
                     class="custom-select-md form-control"
                   >
                     create
@@ -103,8 +102,8 @@
         <tr>
           <td>    
     
-            {% for l in grp %}
-            <div onclick="hideList('{{l.under_name}}')" style="color: black;" >{{l.under_name}}</div>
+            {% for l in emp %}
+            <div onclick="hideList('{{l.name}}')" style="color: white;" >{{l.name}}</div>
             {% endfor %}
           </td>
         </tr>  

@@ -10,10 +10,9 @@
 
 
 <div class="m-3">
-    <a href="javascript:history.go(-1);" class="close">+</a>
 <h6 class="bg-info text-light p-2 m-0 " style="text-align: center;">Currency Alteration (Secondary)</h6>
 {% for i in curr %}
-        <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'currency_altern' i.id %}">
+        <form  style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'statistics_curr_alt' i.id %}">
             {% csrf_token %}
            
             
@@ -100,9 +99,10 @@
                 <h6 style="text-align: center;">Rate Of Exchange</h6>
                 <hr>
             </div>
-
+            {% endfor %}
             <div style="overflow: scroll ;max-height: 70vh; width: 100%;background-color:rgba(0,0,0,0.4); ">
                 <Table class="w-100 table text-center" border="1">
+
                     <tr>
                         
                         <th colspan="2">Standard</th>
@@ -123,12 +123,9 @@
                     </tr>
                     <tr>
                         
-                            {% csrf_token %}
-                      
-        
-        
-                      </select></td>
-                      
+                           
+                  
+                      {% for i in curr1 %}
                       <td> <input type="date" class="w-100 from-control" value="{{ i.stddate }}"  name="standate"></td>
                       <td> <input type="text" class="w-100 from-control" value="{{ i.stdrate }}" name="stdrate" readonly></td>
                       <td> <input type="date" class="w-100 from-control" value="{{ i.selldate }}" name="selldate"></td>
@@ -138,11 +135,11 @@
                       <td> <input type="text" class="w-100 from-control"value="{{ i.buyvorate }}"  name="buyvrate" readonly></td>
 
                       <td> <input type="text" class="w-100 from-control" value="{{ i.buyrate }}"  name="buysrate" readonly></td>
-
+                      {% endfor %}
                       <!-- <td> <button class="btn btn-info">Enter</button></td>  -->
                    
                     </form>
-                    {% endfor %}
+                  
                     </tr>
                     
                     

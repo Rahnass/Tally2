@@ -16,7 +16,7 @@
             <h6 class="bg-info text-light p-2">Currency Alteration (Secondary)</h6>
         <div  style="text-align: center;margin-top:-35px;font-weight:900">{{cmp.name}}</div>
         {% for a in curr %}
-                <form class="p-4" style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'curr_default_alter' a.id %}" autocomplete="off">
+                <form class="p-4" style="background-color:rgba(0,0,0,.4);" method="post" action="{% url 'statistics_cdef_alt' a.id %}" autocomplete="off">
                     {% csrf_token %}
                    
                     <div class="p-3">

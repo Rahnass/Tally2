@@ -1,9 +1,14 @@
+
+
+
 {% extends 'base.html' %}
+
+
 {% block body %}
 
 <head>
     <style>
-
+       
         .close {
             position: absolute;
             top: 0;
@@ -18,16 +23,17 @@
         .close:hover{
             color: white;
         }
-
  .table1 th {
-    border: .5px solid rgba(255, 255, 255, .3); ;
+    border: none ;
     
     
  }
  .table-row{
 cursor:pointer;
 }
-
+/* .table-row:hover{
+    background-color: rgb(216, 155, 51);
+} */
 .table-row1{
 cursor:pointer;
 }
@@ -60,9 +66,7 @@ cursor:pointer;
         <div class="main-panel">
             <div class="content-wrapper">
                 <div class="row d-flex " style="background-color: rgb(103, 175, 220);color:#fff;width:100%;margin: auto;">
-                  
-                   
-                      <div class="col "> <a href="javascript:history.go(-1);" class="close">+</a> Chart of Accounts</div>
+                    <div class="col "> <a href="javascript:history.go(-1);" class="close">+</a>Chart of Accounts</div>
                 </div>
                 
                 <div class="table-responsive ">
@@ -75,7 +79,7 @@ cursor:pointer;
                                 <thead>
                                 <tr>
                                   <th rowspan="3" colspan="2"   class="align-middle text-white "> 
-                                    <h6 class="d-flex align-items-sm-start par p-1 py-1" style="margin-left: 20px;">List of Units</h6>
+                                    <h6 class="d-flex align-items-sm-start par p-1 py-1" style="margin-left: 20px;">List of Employees</h6>
                                     <th rowspan="3"  class="text-white " style="width: 30px;">
                                     <h6 style="text-align: end; font-size: 15px;">
                                         For 1-Apr-22</h6>
@@ -87,28 +91,42 @@ cursor:pointer;
                             </thead>
                             <tbody>
 
-                                {% for a in sunits %}
+                               
+                                {% for a in p_cost %}
 
-                                <tr class="table-row " data-href="{% url 'unit_alter' a.id %}" >
+                                <tr class="table-row " data-href="{% url 'statistics_p_cost' a.id  %}" >
 
-                                    <td colspan="2" >{{ a.symbol }}</td>
-                                  
-                                    {% for a in cunits %}
+                                    <td colspan="2" >{{ a.cat_name }}</td>
+                                    {% for a in empg %}
 
-                                    <tr class="table-row " data-href="{% url 'c_unit_alter' a.id %}" >
+                                    <tr class="table-row " data-href="{% url 'statistics_eg_alt' a.id %}" >
     
-                                        <td colspan="2" >{{ a.first_unit }}&nbsp{{ a.conversion }}&nbsp{{ a.second_unit }}</td>
+                                         <td colspan="2" ><i>{{ a.name }}<i></td>
                                       
                               
                                        
                                     </tr>
                                 
-                                {% endfor %} 
-                                
+                                {% endfor %}
+                                {% for a in emp %}
+
+                                <tr class="table-row " data-href="{% url 'statistics_emp_alt' a.id %}" >
+
+                                     <td colspan="2" ><i>{{ a.name }}<i></td>
+                                  
+                          
                                    
                                 </tr>
                             
-                            {% endfor %} 
+                            {% endfor %}
+                                  
+                          
+                                   
+                                </tr>
+                            
+                            {% endfor %}
+                            
+                            
                             
                             
                             </tbody>
@@ -116,16 +134,45 @@ cursor:pointer;
                         </th>
                           
                           
+                        <tr>
+                            <th colspan="6">{{ cost }} Cost Categories {{ empg1 }} Employee Groups {{ empg2 }} Employees </th>
+                        </tr>   
         
                             </table></div>
+
+                            <table border="default_if_none" class="table1 col" style="text-align: center; margin-top: 10px;border:0;" >
+                                <thead>
+                                    <th ><a href="{% url 'base' %}" type="button"  class="btn p-1 px-4" >QUIT</a></th>
+                                    <th><button type="button"  class="btn p-1 px-4" onclick="selectFunction()">SELECT</button></th>
+                                    
+                                    <th><button type="button"  class="btn p-1 px-1" onclick="removeSelectedRow()">REMOVE LINE</button></th>
+                                    <th><button type="button" id="undo" type="button"  class="btn p-1 px-1" >RESTORE LINE</button></th>
+                                </thead>
+                            </table>
                       
                         
-                     
-                  
+                        </div>
+                      
+
         </div>
         
     </div>
-  
+
+    
+    <script>      
+        function selectFunction() {
+             var se = document.getElementsByClassName('selected');
+             se[0].style.backgroundColor = "lightblue";
+                
+        }
+    </script>
+    
+    <script>
+        function removeSelectedRow()
+            {
+                table.deleteRow(index);     
+            }
+    </script>
 
     
     <script>
@@ -170,5 +217,7 @@ cursor:pointer;
         
         
     </script>
+  
+  
    
 {% endblock %}

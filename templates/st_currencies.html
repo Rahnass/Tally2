@@ -24,7 +24,7 @@
             color: white;
         }
  .table1 th {
-    border: .5px solid rgba(255, 255, 255, .3); ;
+    border:none;
     
     
  }
@@ -79,7 +79,7 @@ cursor:pointer;
                                 <thead>
                                 <tr>
                                   <th rowspan="3" colspan="2"   class="align-middle text-white "> 
-                                    <h6 class="d-flex align-items-sm-start par p-1 py-1" style="margin-left: 20px;">List of Employee Groups</h6>
+                                    <h6 class="d-flex align-items-sm-start par p-1 py-1" style="margin-left: 20px;">List of Currencies</h6>
                                     <th rowspan="3"  class="text-white " style="width: 30px;">
                                     <h6 style="text-align: end; font-size: 15px;">
                                         For 1-Apr-22</h6>
@@ -90,40 +90,47 @@ cursor:pointer;
                                   
                             </thead>
                             <tbody>
+                                {% for a in currencyd %}
 
-                                {% for a in p_cost %}
+                                <tr class="table-row " data-href="{% url 'statistics_curr_alter' a.id %}" >
 
-                                <tr class="table-row " data-href="{% url 'p_cost' a.id %}" >
-
-                                    <td colspan="2" >{{ a.name }}</td>
-                                    {% for a in empg %}
-
-                                    <tr class="table-row " data-href="{% url 'empg_alter' a.id %}" >
-    
-                                         <td colspan="2" ><i>{{ a.name }}<i></td>
-                                      
-                              
-                                       
-                                    </tr>
-                                
-                                {% endfor %}
+                                    <td colspan="2" >{{ a.Symbol }}</td>
                                   
                           
                                    
                                 </tr>
                             
-                            {% endfor %}
-                            
-                            
+                            {% endfor %} 
+                            {% for i in currencydff %}
+
+                            <tr class="table-row " data-href="{% url 'statistics_curr_alter2' i.id %}" >
+
+                                <td colspan="2" >{{ i.Symbol }}</td>
+                              
+                      
+                                
+                            </tr>
+                        
+                        {% endfor %} 
                             </tbody>
                             </table>
                         </th>
                           
-                          
+                        <tr>
+                            <th colspan="6">{{ cur3 }} Currencies </th>
+                        </tr>   
         
+                            </table></div>
+
+                            <table border="default_if_none" class="table1 col" style="text-align: center; margin-top: 10px;border:0;" >
+                                <thead>
+                                    <th ><a href="{% url 'base' %}" type="button"  class="btn p-1 px-4" >QUIT</a></th>
+                                    <th><button type="button"  class="btn p-1 px-4" onclick="selectFunction()">SELECT</button></th>
+                                    
+                                    <th><button type="button"  class="btn p-1 px-1" onclick="removeSelectedRow()">REMOVE LINE</button></th>
+                                    <th><a type="button" id="undo" type="button" href="{% url 'statistics_currencies' %}" class="btn p-1 px-1" >RESTORE LINE</a></th>
+                                </thead>
                             </table>
-                 
-                        
                         </div>
                       
 
@@ -131,7 +138,22 @@ cursor:pointer;
         
     </div>
 
-        
+    <script>      
+        function selectFunction() {
+             var se = document.getElementsByClassName('selected');
+             se[0].style.backgroundColor = "lightblue";
+                
+        }
+    </script>
+    
+    <script>
+        function removeSelectedRow()
+            {
+                table.deleteRow(index);     
+            }
+    </script>
+
+    
     <script>
         $(document).ready(function($) {
             $(".table-row").dblclick(function() {
@@ -167,7 +189,13 @@ cursor:pointer;
 
         getSelectedRow();
 
- </script>
-  
+        
+
+        
+        
+        
+        
+    </script>
    
 {% endblock %}
+

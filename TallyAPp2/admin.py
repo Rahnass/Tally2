@@ -1,14 +1,18 @@
 from django.contrib import admin
 
-from TallyAPp2.models import Accounts, Attendance, Compound_Units, Currency, Employee, Employee_Group, P_cost_default, Simple_Units,  currency_default
+from TallyAPp2.models import  unit_compound ,unit_simple ,uqcs , currencyAlteration ,Currency_alt ,Create_attendence,emp_category , Create_employeegroup , Employee
 
 # Register your models here.
-admin.site.register(currency_default)
-admin.site.register(Currency)
-admin.site.register(Attendance)
-admin.site.register(P_cost_default)
-admin.site.register(Employee_Group)
+
+
 admin.site.register(Employee)
-admin.site.register(Simple_Units)
-admin.site.register(Compound_Units)
-admin.site.register(Accounts)
+admin.site.register(Create_employeegroup)
+admin.site.register(emp_category)
+admin.site.register(Create_attendence)
+admin.site.register(Currency_alt)
+admin.site.register(currencyAlteration)
+admin.site.register(uqcs)
+admin.site.register(unit_simple)
+admin.site.register(unit_compound)
+
+

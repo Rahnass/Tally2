@@ -3,30 +3,42 @@ from django.urls import path
 
 urlpatterns = [
     path('',views.home,name='home'),
-    path('units/',views.units,name='units'),
     path('base/',views.base,name='base'),
-    path('currencies/',views.currencies,name='currencies'),
-    path('atten_prod/',views.atten_prod,name='atten_prod'),
-    path('emp_groups/',views.emp_groups,name='emp_groups'),
-    path('employee/',views.employee,name='employee'),
-    path('curr_alter/<int:pk>',views.curr_alter,name='curr_alter'),
-    path('unit_alter/<int:pk>',views.unit_alter,name='unit_alter'),
-    path('curr_alter2/<int:pk>',views.curr_alter2,name='curr_alter2'),
-    path('atten_alter/<int:pk>',views.atten_alter,name='atten_alter'),
-    path('empg_alter/<int:pk>',views.empg_alter,name='empg_alter'),
-    path('empg_details/<int:pk>',views.empg_details,name='empg_details'),
-    path('create_pay_head/',views.create_pay_head,name='create_pay_head'),
-    path('p_cost/<int:pk>',views.p_cost,name='p_cost'),
-    path('emp_alter/<int:pk>',views.emp_alter,name='emp_alter'),
-    path('c_unit_alter/<int:pk>',views.c_unit_alter,name='c_unit_alter'),
-    path('simple_unit_alter/<int:pk>',views.simple_unit_alter,name='simple_unit_alter'),
-    path('compound_unit_alter/<int:pk>',views.compound_unit_alter,name='compound_unit_alter'),
-    path('curr_default_alter/<int:pk>',views.curr_default_alter,name='curr_default_alter'),
-    path('currency_altern/<int:pk>',views.currency_altern,name='currency_altern'),
-    path('attendance_alter/<int:pk>',views.attendance_alter,name='attendance_alter'),
-    path('pcost_alter/<int:pk>',views.pcost_alter,name='pcost_alter'),
-    path('employee_grp_alter/<int:pk>',views.employee_grp_alter,name='employee_grp_alter'),
-    path('employee_alter/<int:pk>',views.employee_alter,name='employee_alter'),
-    path('attend_create/',views.attend_create,name='attend_create'),
-    path('add_pay_head/',views.add_pay_head,name='add_pay_head'),
+
+    path('statistics_units/',views.statistics_units,name='statistics_units'),
+    path('statistics_unit_alter/<int:pk>',views.statistics_unit_alter,name='statistics_unit_alter'),
+    path('statistics_cunit_alter/<int:pk>',views.statistics_cunit_alter,name='statistics_cunit_alter'),
+    path('statistics_su_alter/<int:pk>',views.statistics_su_alter,name='statistics_su_alter'),
+    path('statistics_cu_alter/<int:pk>',views.statistics_cu_alter,name='statistics_cu_alter'),
+
+    path('statistics_currencies/',views.statistics_currencies,name='statistics_currencies'),
+    path('statistics_curr_alter/<int:pk>',views.statistics_curr_alter,name='statistics_curr_alter'),   
+    path('statistics_curr_alter2/<int:pk>',views.statistics_curr_alter2,name='statistics_curr_alter2'),
+    path('statistics_cdef_alt/<int:pk>',views.statistics_cdef_alt,name='statistics_cdef_alt'),
+    path('statistics_curr_alt/<int:pk>',views.statistics_curr_alt,name='statistics_curr_alt'),
+
+    path('statistics_atten_prod/',views.statistics_atten_prod,name='statistics_atten_prod'),
+    path('statistics_atten_alt/<int:pk>',views.statistics_atten_alt,name='statistics_atten_alt'),
+    path('statistics_atten_alter/<int:pk>',views.statistics_atten_alter,name='statistics_atten_alter'),
+    path('statistics_att_create/',views.statistics_att_create,name='statistics_att_create'),
+    path('statistics_add_attend/',views.statistics_add_attend,name='statistics_add_attend'),
+
+    path('statistics_emp_groups/',views.statistics_emp_groups,name='statistics_emp_groups'),
+    path('statistics_p_cost/<int:pk>',views.statistics_p_cost,name='statistics_p_cost'),
+    path('statistics_eg_alt/<int:pk>',views.statistics_eg_alt,name='statistics_eg_alt'),
+    path('statistics_pcost_alt/<int:pk>',views.statistics_pcost_alt,name='statistics_pcost_alt'),
+    path('statistics_empgrp_alt/<int:pk>',views.statistics_empgrp_alt,name='statistics_empgrp_alt'),
+    path('statistics_empg_dtls/<int:pk>',views.statistics_empg_dtls,name='statistics_empg_dtls'),
+    path('statistics_create_payhd/',views.statistics_create_payhd,name='statistics_create_payhd'),
+    path('statistics_empg_create/',views.statistics_empg_create,name='statistics_empg_create'),
+    path('statistics_add_empg/',views.statistics_add_empg,name='statistics_add_empg'),
+
+    path('statistics_employee/',views.statistics_employee,name='statistics_employee'),
+    path('statistics_emp_alt/<int:pk>',views.statistics_emp_alt,name='statistics_emp_alt'),
+    path('statistics_employee_alt/<int:pk>',views.statistics_employee_alt,name='statistics_employee_alt'),
+    
+
+
+
+    path('statistics_add_payhead/',views.statistics_add_payhead,name='statistics_add_payhead'),
 ]

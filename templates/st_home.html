@@ -78,14 +78,14 @@ cursor:pointer;
 
                                
                                 
-                              <tr class="table-row " data-href="{% url 'units' %}" >
+                              <tr class="table-row " data-href="{% url 'statistics_units' %}" >
                                     <td colspan="2" >Units</td>
                                   
                                     <td style="text-align: center;" >{{ uni3 }}</td>
                                    
                                 </tr>
                                 
-                                <tr class="table-row " data-href="{% url 'currencies' %}" >
+                                <tr class="table-row " data-href="{% url 'statistics_currencies' %}" >
                                     <td colspan="2" >Currencies</td>
                                   
                                     <td style="text-align: center;" >{{ cur3 }}</td>
@@ -93,7 +93,7 @@ cursor:pointer;
                                    
                                 </tr>
                                 
-                                <tr class="table-row " data-href="{% url 'atten_prod' %}" >
+                                <tr class="table-row " data-href="{% url 'statistics_atten_prod' %}" >
                                     <td colspan="2" >Attendance / Production Types</td>
                                   
                                     <td style="text-align: center;" >{{ att1 }}</td>
@@ -101,14 +101,14 @@ cursor:pointer;
                                 </tr>
 
                                 
-                                <tr class="table-row " data-href="{% url 'emp_groups' %}" >
+                                <tr class="table-row " data-href="{% url 'statistics_emp_groups' %}" >
                                     <td colspan="2" >Employee Groups</td>
                                   
                                     <td style="text-align: center;" >{{ empg }}</td>
                                    
                                 </tr>
                                 
-                                <tr class="table-row " data-href="{% url 'employee' %}" >
+                                <tr class="table-row " data-href="{% url 'statistics_employee' %}" >
                                     <td colspan="2" >Employees</td>
                                   
                                     <td style="text-align: center;" >{{ emp }}</td>
@@ -151,74 +151,57 @@ cursor:pointer;
             <th ><a href="{% url 'base' %}" type="button"  class="btn p-1 px-4" >Quit</a></th>
             <th><button type="button"  class="btn p-1 px-4" onclick="selectFunction()">Select</button></th>
             <th><button type="button"  class="btn p-1 px-1" onclick="removeSelectedRow()">Remove Line</button></th>
-            <th><button type="button" id="undo" type="button"  class="btn p-1 px-1" >Restore Line</button>></th>
+            <th><a type="button" id="undo" type="button" href="{% url 'home' %}"  class="btn p-1 px-1" >Restore Line</a></th>
         </thead>
     </table>
 </footer>
-    <script>
-        $(document).ready(function($) {
-            $(".table-row").dblclick(function() {
-                window.document.location = $(this).data("href");
-            });
-        });
-    </script>
-    <script>
-            
-        var index;  // variable to set the selected row index
-        function getSelectedRow()
+<script>        
+    var index;  // variable to set the selected row index
+    function getSelectedRow()
+    {
+        var table = document.getElementById("table");
+        for(var i = 1; i < table.rows.length; i++)
         {
-            var table = document.getElementById("table");
-            for(var i = 1; i < table.rows.length; i++)
+            table.rows[i].onclick = function()
             {
-                table.rows[i].onclick = function()
-                {
-                    // clear the selected from the previous selected row
-                    // the first time index is undefined
-                    if(typeof index !== "undefined"){
-                        table.rows[index].classList.toggle("selected");
-                    }
-                   
-                    index = this.rowIndex;
-                    this.classList.toggle("selected");
-
-                };
-            }
-                
+                // clear the selected from the previous selected row
+                // the first time index is undefined
+                if(typeof index !== "undefined"){
+                    table.rows[index].classList.toggle("selected");
+                }              
+                index = this.rowIndex;
+                this.classList.toggle("selected");
+            };
         }
+    }
+    getSelectedRow();
+</script>
 
-
-        getSelectedRow();
-
-        
-
-        
-        
-        
-        
-    </script>
-    
-    <script>
-
-       
-        function selectFunction() {
-            var se = document.getElementsByClassName('selected');
-            se[0].style.backgroundColor = "lightblue";
-               
-       }
-        </script>
-
+<script>      
+    function selectFunction() {
+         var se = document.getElementsByClassName('selected');
+         se[0].style.backgroundColor = "lightblue";
+            
+    }
+</script>
 
 <script>
     function removeSelectedRow()
-            {
-                table.deleteRow(index);
-                
-            }
-
-
-
-          
+        {
+            table.deleteRow(index);     
+        }
 </script>
+
+
+<script>
+    $(document).ready(function($) {
+        $(".table-row").dblclick(function() {
+            window.document.location = $(this).data("href");
+        });
+    });
+</script>
+          
+
 
 
 

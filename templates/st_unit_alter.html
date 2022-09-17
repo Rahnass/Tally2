@@ -62,7 +62,7 @@
     <div class="col-md-4" >
         <h6  class="bg-info text-light p-2 m-0 text-left">unit alteration (Secondary)</h6>
         {% for a in uni %}
-            <form id="" action="{% url 'simple_unit_alter' a.id %}" method="post" class="p-5" style="background-color:rgba(0,0,0,.4);">
+            <form id="" action="{% url 'statistics_su_alter' a.id %}" method="post" class="p-5" style="background-color:rgba(0,0,0,.4);">
                 {% csrf_token %}
                
 
