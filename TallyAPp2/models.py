@@ -4,6 +4,28 @@ from django.db import models
 
 # Create your models here.
 
+class Companies(models.Model):
+    d_path=models.CharField(max_length=100,null=True)
+    name = models.CharField(max_length=255)
+    mailing_name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+    country = models.CharField(max_length=255)
+    pincode = models.CharField(max_length=10,null=True)
+    telephone = models.CharField(max_length=20,null=True)
+    mobile = models.CharField(max_length=15,null=True)
+    fax = models.CharField(max_length=15,null=True)
+    email = models.EmailField(null=True)
+    password = models.CharField(max_length=240, null=True)
+    website = models.CharField(max_length=100,null=True)
+    currency_symbol = models.CharField(max_length=20)
+    formal_name = models.CharField(max_length=20)
+    fin_begin = models.DateField()
+    books_begin = models.DateField()
+    fin_end = models.DateField()
+    status=models.BooleanField(default=True)
+
+
 class unit_simple(models.Model):
     type=models.CharField(max_length=100)
     symbol=models.CharField(max_length=100)

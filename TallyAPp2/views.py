@@ -1,14 +1,21 @@
 
 
+
 from django.shortcuts import render,redirect
 
-from TallyAPp2.models import  Create_attendence, Create_employeegroup, Currency_alt, E_found_trasfer, Employee, Rounding, add_bank, compute_information, create_payhead,currencyAlteration, emp_category, gratuity, salary, unit_compound, unit_simple
+from TallyAPp2.models import  Companies, Create_attendence, Create_employeegroup, Currency_alt, E_found_trasfer, Employee, Rounding, add_bank, compute_information, create_payhead,currencyAlteration, emp_category, gratuity, salary, unit_compound, unit_simple
 
 # Create your views here.
 def base(request):
     return render(request,'index.html')
 
 def home(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     att1=Create_attendence.objects.count()
     uni1=unit_simple.objects.count()
     uni2=unit_compound.objects.count()
@@ -22,6 +29,12 @@ def home(request):
 #  units------
 
 def statistics_units(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     sunits=unit_simple.objects.all()
     cunits=unit_compound.objects.all()
     uni1=unit_simple.objects.count()
@@ -31,11 +44,23 @@ def statistics_units(request):
     return render(request,'st_units.html',context) 
 
 def statistics_unit_alter(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     uni=unit_simple.objects.filter(id=pk)
     context={'uni':uni}
     return render(request,'st_unit_alter.html',context)   
 
 def statistics_su_alter(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         sgrp =unit_simple.objects.get(id=pk)
         sgrp.symbol = request.POST.get('symbol')
@@ -47,12 +72,24 @@ def statistics_su_alter(request,pk):
     return render(request, 'st_units.html')     
 
 def statistics_cunit_alter(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     uni=unit_compound.objects.filter(id=pk)
     uuu=unit_simple.objects.all()
     context={'uni':uni,'uuu':uuu}
     return render(request,'st_unitalteration.html',context)     
 
 def statistics_cu_alter(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         cmp =unit_compound.objects.get(id=pk)
         cmp.f_unit = request.POST.get('first_unit')
@@ -67,6 +104,12 @@ def statistics_cu_alter(request,pk):
 #  currencies-----           
 
 def statistics_currencies(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     currencyd=currencyAlteration.objects.filter(id=1)
     currencydff=currencyAlteration.objects.all().exclude(id=1)
     currency=Currency_alt.objects.all()
@@ -75,11 +118,23 @@ def statistics_currencies(request):
     return render(request,'st_currencies.html',context)  
 
 def statistics_curr_alter(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     curr=currencyAlteration.objects.filter(id=pk)
     context={'curr':curr}
     return render(request,'st_curr_alter.html',context)    
 
 def statistics_cdef_alt(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         cur =currencyAlteration.objects.get(id=pk)
         cur.Symbol = request.POST.get('c_symbl')
@@ -96,6 +151,12 @@ def statistics_cdef_alt(request,pk):
     return render(request, 'st_currencies.html')       
 
 def statistics_curr_alter2(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     curr=currencyAlteration.objects.filter(id=pk)
     curr1=Currency_alt.objects.filter(currencyAlteration_id=pk)
     context={'curr':curr,'curr1':curr1}
@@ -104,6 +165,12 @@ def statistics_curr_alter2(request,pk):
 
 
 def statistics_curr_alt(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         curr = currencyAlteration.objects.get(id=pk)
         curr.Symbol=request.POST.get('symbol')
@@ -132,18 +199,36 @@ def statistics_curr_alt(request,pk):
 #  Attendence / Production types -----       
 
 def statistics_atten_prod(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     attendance=Create_attendence.objects.all()
     att1=Create_attendence.objects.count()
     context={'att1':att1,'attendance':attendance}
     return render(request,'st_attend_prod.html',context)   
 
 def statistics_atten_alt(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     att=Create_attendence.objects.filter(id=pk)
     attendance=Create_attendence.objects.all()
     context={'att':att,'attendance':attendance}
     return render(request,'st_attendance_alter.html',context)    
 
 def statistics_atten_alter(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         attend =Create_attendence.objects.get(id=pk)
         attend.name = request.POST.get('name')
@@ -157,11 +242,23 @@ def statistics_atten_alter(request,pk):
     return render(request, 'st_attend_prod.html')    
 
 def statistics_att_create(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     aaa = Create_attendence.objects.all()
     context = {'aaa':aaa}
     return render(request,'st_attend_create.html',context)    
 
 def statistics_add_attend(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         name = request.POST.get('name')
         alias = request.POST.get('alias')
@@ -181,6 +278,12 @@ def statistics_add_attend(request):
 #  Employee Groups---------
 
 def statistics_emp_groups(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     p_cost=emp_category.objects.all()
     empg=Create_employeegroup.objects.all()
     cost=emp_category.objects.count()
@@ -190,11 +293,23 @@ def statistics_emp_groups(request):
 
   
 def statistics_p_cost(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     pcos=emp_category.objects.filter(id=pk)
     context={'pcos':pcos}
     return render(request,'st_pcost_alter.html',context)  
 
 def statistics_pcost_alt(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         pcost =emp_category.objects.get(id=pk)
         pcost.cat_name = request.POST.get('name')
@@ -207,12 +322,24 @@ def statistics_pcost_alt(request,pk):
      
 
 def statistics_eg_alt(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     empalter=Create_employeegroup.objects.filter(id=pk)
     emp=Create_employeegroup.objects.all()
     context={'empalter':empalter,'emp':emp}
     return render(request,'st_emp_group_alter.html',context)    
 
 def statistics_empgrp_alt(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         empga =Create_employeegroup.objects.get(id=pk)
         empga.name = request.POST.get('name')
@@ -224,6 +351,12 @@ def statistics_empgrp_alt(request,pk):
     return render(request, 'st_employee_group.html')      
 
 def statistics_empg_dtls(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     empgd=Create_employeegroup.objects.filter(id=pk)
     epay=create_payhead.objects.all()
     if request.method=='POST':
@@ -251,6 +384,12 @@ def statistics_empg_dtls(request,pk):
 
 
 def statistics_create_payhd(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     ph=Create_attendence.objects.filter(type="Attendance/Leave with pay")
     ph2=Create_attendence.objects.filter(type="Production")
     std=Create_attendence.objects.all()
@@ -258,6 +397,12 @@ def statistics_create_payhd(request):
 
 
 def statistics_add_payhead(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         name=request.POST['name']
         alias=request.POST['alias']
@@ -336,6 +481,12 @@ def statistics_add_payhead(request):
     return render(request,'st_pay_head.html')  
 
 def statistics_add_salaryd(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         empga =Create_employeegroup.objects.get(id=pk)
         empga.name = request.POST.get('name')
@@ -348,11 +499,23 @@ def statistics_add_salaryd(request,pk):
 
 
 def statistics_empg_create(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     aaa = Create_employeegroup.objects.all()
     context = {'aaa':aaa}
     return render(request,'st_create_empg.html',context)     
 
 def statistics_add_empg(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         name = request.POST.get('name')
         alias = request.POST.get('alias')
@@ -372,6 +535,12 @@ def statistics_add_empg(request):
 
 
 def statistics_employee(request):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     p_cost=emp_category.objects.all()
     empg=Create_employeegroup.objects.all()
     emp=Employee.objects.all()
@@ -383,6 +552,12 @@ def statistics_employee(request):
 
     
 def statistics_emp_alt(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     emm=Employee.objects.filter(id=pk)
     empg=Create_employeegroup.objects.all()
     context={'emm':emm,'empg':empg}
@@ -390,6 +565,12 @@ def statistics_emp_alt(request,pk):
 
   
 def statistics_employee_alt(request,pk):
+    if 't_id' in request.session:
+        if request.session.has_key('t_id'):
+            t_id = request.session['t_id']
+        else:
+            return redirect('/')
+        tally = Companies.objects.filter(id=t_id)
     if request.method=='POST':
         empp =Employee.objects.get(id=pk)
         empp.name =request.POST.get('name')
